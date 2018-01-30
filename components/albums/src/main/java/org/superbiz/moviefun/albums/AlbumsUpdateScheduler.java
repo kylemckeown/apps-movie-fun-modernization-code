@@ -52,7 +52,7 @@ public class AlbumsUpdateScheduler {
             "UPDATE album_scheduler_task" +
                 " SET started_at = now()" +
                 " WHERE started_at IS NULL" +
-                " OR started_at < date_sub(now(), INTERVAL 2 MINUTE)"
+                " OR started_at < date_sub(now(), INTERVAL 1 MINUTE)"
         );
 
         return updatedRows > 0;

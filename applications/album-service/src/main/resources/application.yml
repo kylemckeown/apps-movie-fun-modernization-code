@@ -1,19 +1,13 @@
+server.port: 8081
+
 spring:
   jpa:
     generate-ddl: true
     properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
 
   datasource:
-    url: jdbc:mysql://localhost:3306/movies?useSSL=false
+    url: jdbc:mysql://localhost:3306/albums?useSSL=false
     username: root
-
-  mvc.view:
-    prefix: /WEB-INF/
-    suffix: .jsp
-
-logging.level:
-  root: INFO
-  org.superbiz.moviefun: DEBUG
 
 s3:
   endpointUrl: http://127.0.0.1:9000/
@@ -21,5 +15,6 @@ s3:
   secretKey: nxa2+FTdjzkm36D3eUpw4YhaLRZBtC+3oaY+bxcH
   bucketName: moviefun
 
-movies.url: http://localhost:8082/movies
-albums.url: http://localhost:8081/albums
+logging.level:
+  root: WARN
+  org.superbiz.moviefun: DEBUG

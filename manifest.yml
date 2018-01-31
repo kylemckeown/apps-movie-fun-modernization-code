@@ -1,17 +1,31 @@
 ---
+services:
+- movie-fun-sso
 memory: 1G
 instances: 1
 applications:
 - name: album-service
+  routes:
+  - route: album-service-jk.apps.pikes.pal.pivotal.io
+  env:
+    GRANT_TYPE: client_credentials
   path: applications/album-service/build/libs/album-service-1.1.0-SNAPSHOT.jar
   services:
   - album-database
 - name: movie-service
+  routes:
+  - route: movie-service-jk.apps.pikes.pal.pivotal.io
+  env:
+    GRANT_TYPE: client_credentials
   path: applications/movie-service/build/libs/movie-service-1.1.0-SNAPSHOT.jar
   services:
   - movie-database
 - name: movie-fun-app
+  env:
+    GRANT_TYPE: authorization_code
+  routes:
+  - route: moviefun-jk.apps.pikes.pal.pivotal.io
   path: applications/movie-fun-app/build/libs/movie-fun-app-1.1.0-SNAPSHOT.war
   env:
-    ALBUMS_URL: http://album-service.cfapps-02.haas-66.pez.pivotal.io/albums
-    MOVIES_URL: http://movie-service.cfapps-02.haas-66.pez.pivotal.io/movies
+    ALBUMS_URL: http://album-service-jk.apps.pikes.pal.pivotal.io/albums
+    MOVIES_URL: http://movie-service-jk.apps.pikes.pal.pivotal.io/movies

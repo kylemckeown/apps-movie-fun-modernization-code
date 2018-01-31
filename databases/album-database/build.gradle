@@ -25,10 +25,11 @@ task openTunnel {
     doLast {
         println 'Opening Tunnel'
         Thread.start {
+            println "cf ssh -N -L 63306:${getMysqlHost("album-service")}:3306 album-service"
             tunnelProcess = "cf ssh -N -L 63306:${getMysqlHost("album-service")}:3306 album-service".execute()
         }
 
-        sleep 5_000L
+        sleep 10_000L
     }
 }
 

@@ -7,7 +7,7 @@ def getMysqlCredentials(cfAppName) {
     process.waitFor()
 
     if (process.exitValue() != 0) {
-        return extension
+        throw new GradleException("Error getting env for app: $cfAppName");
     }
 
     def vcapServices = new JsonSlurper().parseText(

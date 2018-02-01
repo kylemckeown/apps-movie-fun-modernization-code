@@ -7,15 +7,23 @@ services:
 applications:
 - name: album-service
   path: applications/album-service/build/libs/album-service-1.1.0-SNAPSHOT.jar
+  routes:
+  - route: album-service-jk.apps.pikes.pal.pivotal.io
   services:
   - album-database
   env:
     GRANT_TYPE: client_credentials
 - name: movie-service
   path: applications/movie-service/build/libs/movie-service-1.1.0-SNAPSHOT.jar
+  routes:
+  - route: movie-service-jk.apps.pikes.pal.pivotal.io
   services:
   - movie-database
   env:
     GRANT_TYPE: client_credentials
 - name: movie-fun-app
   path: applications/movie-fun-app/build/libs/movie-fun-app-1.1.0-SNAPSHOT.war
+  routes:
+  - route: moviefun-jk.apps.pikes.pal.pivotal.io
+  services:
+  - movie-fun-config

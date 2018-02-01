@@ -4,6 +4,7 @@ def services = [
     [type: "p-identity", plan: "p-identity", instance: "movie-fun-sso"],
     [type: "p-service-registry", plan: "standard", instance: "movie-fun-registry"],
     [type: "p-config-server", plan: "standard", instance: "movie-fun-config", config: "config-server.json"],
+    [type: "p-circuit-breaker-dashboard", plan: "standard", instance: "movie-fun-circuit-breaker"],
 ]
 
 task teardownPcfEnv {
@@ -36,6 +37,15 @@ task setupPcfEnv {
         services.each {
             println createServiceCommand(it).execute().text
         }
+
+        "cf set-env movie-fun-app S3_ENDPOINTURL http://s3.amazonaws.com".execute().text
+        "cf set-env movie-fun-app S3_ACCESSKEY AKIAJEACTVU7CYHTV4RA".execute().text
+        "cf set-env movie-fun-app S3_SECRETKEY 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".execute().text
+        "cf set-env movie-fun-app S3_BUCKETNAME cf-60841064-857f-4f31-8c34-2ab063003526".execute().text
+        "cf set-env album-service S3_ENDPOINTURL http://s3.amazonaws.com".execute().text
+        "cf set-env album-service S3_ACCESSKEY AKIAJEACTVU7CYHTV4RA".execute().text
+        "cf set-env album-service S3_SECRETKEY 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".execute().text
+        "cf set-env album-service S3_BUCKETNAME cf-60841064-857f-4f31-8c34-2ab063003526".execute().text
     }
 }
 
